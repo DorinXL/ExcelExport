@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.venv/
+
+# Build
+build/
+dist/
+*.spec
+
+# Project Specific
+Output/
+Releases/
+_verify_new_header/
+_verify_old_output/
+_verify_v3/
+Output/
+Releases/
+
+游戏导表工具文档/
+
+# OS
+.DS_Store
+Thumbs.db
