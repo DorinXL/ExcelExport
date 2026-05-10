@@ -215,7 +215,7 @@ def parse_value(raw_value: Any, type_mark: str) -> tuple[Any, str | None]:
 
 def parse_int_value(raw_value: Any) -> tuple[int | None, str | None]:
     if raw_value is None or (isinstance(raw_value, str) and raw_value.strip() == ""):
-        return None, "期望 int 类型，但单元格为空"
+        return 0, None
 
     try:
         if isinstance(raw_value, bool):
@@ -240,7 +240,7 @@ def parse_int_value(raw_value: Any) -> tuple[int | None, str | None]:
 
 def parse_float_value(raw_value: Any) -> tuple[float | None, str | None]:
     if raw_value is None or (isinstance(raw_value, str) and raw_value.strip() == ""):
-        return None, "期望 float 类型，但单元格为空"
+        return 0.0, None
 
     try:
         return float(raw_value), None

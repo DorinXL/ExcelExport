@@ -18,6 +18,7 @@ _verify_new_header/
 _verify_old_output/
 _verify_v3/
 _verify_v4/
+_verify_v5/
 
 Output/
 Releases/
