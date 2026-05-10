@@ -7,7 +7,6 @@ from typing import Any
 from openpyxl import load_workbook
 
 from config import (
-    ARRAY_SEPARATOR,
     DATA_START_ROW_INDEX,
     HEADER_ROW_INDEX,
     TYPE_ROW_INDEX,
@@ -203,7 +202,13 @@ def parse_value(raw_value: Any, type_mark: str) -> tuple[Any, str | None]:
     if type_mark == "array_string":
         if is_blank(raw_value):
             return [], None
-        return [part for part in str(raw_value).split(ARRAY_SEPARATOR) if part != ""], None
+        text = str(raw_value).strip()
+        if not (text.startswith("[") and text.endswith("]")):
+            return None, f"期望数组使用 [...] 格式，实际值为 '{raw_value}'"
+        inner_text = text[1:-1].strip()
+        if not inner_text:
+            return [], None
+        return [part.strip() for part in inner_text.split(",") if part.strip() != ""], None
 
     return None, f"未知类型标记 '{type_mark}'"
 
@@ -249,8 +254,16 @@ def parse_array_value(
     if is_blank(raw_value):
         return [], None
 
+    text = str(raw_value).strip()
+    if not (text.startswith("[") and text.endswith("]")):
+        return None, f"期望数组使用 [...] 格式，实际值为 '{raw_value}'"
+
+    inner_text = text[1:-1].strip()
+    if not inner_text:
+        return [], None
+
     results: list[Any] = []
-    parts = str(raw_value).split(ARRAY_SEPARATOR)
+    parts = inner_text.split(",")
     for part in parts:
         stripped = part.strip()
         if stripped == "":

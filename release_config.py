@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 APP_NAME = "Excel2Json"
-APP_VERSION = "0.3.0"
+APP_VERSION = "0.4.0"
 RELEASES_DIRNAME = "Releases"
 VERSION_PREFIX = "v"
 
